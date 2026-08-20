@@ -24,5 +24,8 @@
             </tr>
         {% endfor %}
     </tbody>
+    <div class="navigation">
+        {{ knp_pagination_render(books) }}
+    </div>
 </table>
 {% endblock %}
