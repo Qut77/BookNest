@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Главная{% endblock %}
+
+{% block body %}
+<table class="table">
+    <thead>
+        <tr>
+            <th csope="col">Title</th>
+            <th csope="col">Author</th>
+            <th csope="col">Status</th>
+            <th csope="col">Rating</th>
+            {# <th csope="col">Genre</th> #}
+        </tr>
+    </thead>
+    <tbody>
+        {% for book in books %}
+            <tr>
+                <td>{{ book.title }}</td>
+                <td>{{ book.author }}</td>
+                <td>{{ book.status }}</td>
+                <td>{{ book.rating }}</td>
+                {# <td>{{ book.genre }}</td> #}
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
