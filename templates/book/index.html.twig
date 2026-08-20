@@ -24,8 +24,9 @@
             </tr>
         {% endfor %}
     </tbody>
+</table>
     <div class="navigation">
         {{ knp_pagination_render(books) }}
     </div>
-</table>
+    <a href="{{ path('Add_book') }}" class="btn btn-info">Добавить книгу</a>
 {% endblock %}
