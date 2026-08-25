@@ -3,5 +3,5 @@
 {% block title %}Редактирование книги{% endblock %}
 
 {% block body %}
-    {{ form(form) }}
+    {{ form(form, {'attr': {'data-turbo': 'false'}}) }}
 {% endblock %}

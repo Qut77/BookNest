@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\BookRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: BookRepository::class)]
 class Book
@@ -14,16 +15,30 @@ class Book
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: 'Введите название книги')]
+    #[Assert\Length(
+        min:1,
+        max:255,
+        minMessage: 'Название должно быть не короче {{ limit }} символов'
+    )]
     private ?string $title = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: 'Введите автора')]
     private ?string $author = null;
 
     #[ORM\Column(nullable: true)]
+    #[Assert\NotBlank(message:'Введите рейтинг')]
+    #[Assert\Range(
+        min:1,
+        max:5,
+        notInRangeMessage: 'Рейтинг должен быть от {{ min }} до {{ max }}'
+    )]
     private ?int $rating = null;
 
     #[ORM\ManyToOne(inversedBy: 'books')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Assert\NotNull(message: 'Выберите статус')]
     private ?Status $status = null;
 
     public function getId(): ?int
