@@ -46,4 +46,20 @@ final class BookController extends AbstractController
             'form' => $form->createView()
         ]);
     }
+
+    #[Route('/update/{id}', name:'Upd_book')]
+    public function edit(Request $request, EntityManagerInterface $em, Book $book):Response
+    {
+        $form = $this->createForm(BookType::class, $book);
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid())
+            {
+                $em->flush();
+                return $this->redirectToRoute('app_book');
+            }
+        
+        return $this->render('book/add.html.twig',[
+            'form' => $form->createView()
+        ]);
+    }
 }
