@@ -22,7 +22,13 @@
                 <td>{{ book.status }}</td>
                 <td>{{ book.rating }}</td>
                 {# <td>{{ book.genre }}</td> #}
-                <td><a href="{{ path('Upd_book', {'id':book.id}) }}" class="btn btn-primary">Изменить</a></td>
+                <td>
+                    <a href="{{ path('Upd_book', {'id':book.id}) }}" class="btn btn-primary">Изменить</a>
+                    <form action="{{ path('Del_book', {'id':book.id}) }}" method="post">
+                        <input type="hidden" name="_token" value="{{ csrf_token('my-token-id') }}">
+                        <button class="btn btn-danger">Удалить</button>
+                    </form>
+                </td>
             </tr>
         {% endfor %}
     </tbody>

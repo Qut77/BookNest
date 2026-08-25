@@ -11,6 +11,7 @@ use App\Form\BookType;
 use App\Repository\BookRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Exception\InvalidCsrfTokenException;
 
 final class BookController extends AbstractController
 {
@@ -61,5 +62,18 @@ final class BookController extends AbstractController
         return $this->render('book/add.html.twig',[
             'form' => $form->createView()
         ]);
+    }
+
+    #[Route('/delete/{id}', name:'Del_book', methods:['POST'])]
+    public function delete(Request $request, EntityManagerInterface $em, Book $book):Response
+    {
+        $token = $request->getPayload()->get('_token');
+        if (!$this->isCsrfTokenValid('my-token-id', $token)) {
+            throw new InvalidCsrfTokenException('Неверный CSRF токен');
+        }
+        $em->remove($book);
+        $em->flush();
+        return $this->redirectToRoute('app_book');
+        
     }
 }
