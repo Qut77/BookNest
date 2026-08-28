@@ -10,7 +10,7 @@
             <th csope="col">Author</th>
             <th csope="col">Status</th>
             <th csope="col">Rating</th>
-            {# <th csope="col">Genre</th> #}
+            <th csope="col">Genre</th>
             <th csope="col">Actions</th>
         </tr>
     </thead>
@@ -21,7 +21,11 @@
                 <td>{{ book.author }}</td>
                 <td>{{ book.status }}</td>
                 <td>{{ book.rating }}</td>
-                {# <td>{{ book.genre }}</td> #}
+                <td>
+                    {% for genre in book.genres %}
+                        <span class="badge bg-secondary">{{ genre.name }}</span>
+                    {% endfor %}
+                </td>
                 <td>
                     <a href="{{ path('Upd_book', {'id':book.id}) }}" class="btn btn-primary">Изменить</a>
                     <form action="{{ path('Del_book', {'id':book.id}) }}" method="post">

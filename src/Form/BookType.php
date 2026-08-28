@@ -4,6 +4,8 @@ namespace App\Form;
 
 use App\Entity\Book;
 use App\Entity\Status;
+use App\Entity\Genre;
+use MultipleIterator;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
@@ -23,6 +25,12 @@ class BookType extends AbstractType
             ->add('status', EntityType::class, [
                 'class' => Status::class,
                 'choice_label' => 'name',
+            ])
+            ->add('genres', EntityType::class, [
+                'class' => Genre::class,
+                'choice_label' => 'name',
+                'multiple' => true,
+                'expanded' => true
             ])
             ->add('save', SubmitType::class, [
                 'label' => "Сохранить",
